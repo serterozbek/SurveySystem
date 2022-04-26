@@ -54,5 +54,17 @@ namespace Survey_System.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return HttpNotFound();
+            }
+            var person = db.Person.Find(id);
+            db.Person.Remove(person);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

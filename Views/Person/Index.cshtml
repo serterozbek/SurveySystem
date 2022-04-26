@@ -66,7 +66,18 @@
                         <td>@item.Password</td>
                         <td>@item.CreateDate</td>
                         <td>@item.CreateBy</td>
-                        <td><a class="btn btn-danger" href="/Person/Edit/@item.id">Düzenle</a></td>
+                        <td><a class="btn btn-danger" href="/Person/Edit/@item.id"><i class="fa fa fa-pencil"></i></a>
+                        <a class="btn btn-pinterest" onclick="Delete(@item.id)">
+                            <i class="fa fa fa-trash-o text-white"></i> 
+                            </a>
+                            <script>
+                                function Delete(id) {
+                                    var link = "/Person/Delete/" + id;
+                                    jQuery("#modalLink").attr("href", link);
+                                    jQuery("#deleteperson").modal()
+                                }
+                            </script>
+                        </td>
                     </tr>
                     }
                     
@@ -98,4 +109,25 @@
         });
     })(jQueryCalis);
 </script>
+
+
+<div class="modal fade" id="deleteperson">
+    <div class="modal-dialog">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kayıt Silme Ekranı</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Kapat</button>
+                <a class="btn btn-danger" id="modalLink"><i class="fa fa-check-square-o"></i> Sil </a>
+            </div>
+        </div>
+    </div>
+</div>
 
