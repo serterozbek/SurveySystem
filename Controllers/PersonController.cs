@@ -12,7 +12,8 @@ namespace Survey_System.Controllers
         survey_systemEntities db = new survey_systemEntities();
         public ActionResult Index()
         {
-            return View();
+            var model = db.Person.ToList();
+            return View(model);
         }
 
         public ActionResult Create(Person person)
@@ -32,6 +33,26 @@ namespace Survey_System.Controllers
 
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id==null || id==0)
+            {
+                return HttpNotFound();
+            }
+            var model = db.Person.Find(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(Person person)
+        {
+            db.Entry(person).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(person).Property(e => e.CreateBy).IsModified = false;
+            db.Entry(person).Property(e => e.CreateDate).IsModified = false;
 
+            person.ModifyBy = "System Edit";
+            person.ModifyDate = DateTime.Now;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

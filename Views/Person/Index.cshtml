@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Survey_System.Models.Person>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Content/assets/js/jquery.min.js"></script>
@@ -28,7 +29,7 @@
             <div class="card-body">     
                     <div class="media">
                         <div class="media-body text-left">
-                            <h4 class="text-white">25</h4>
+                            <h4 class="text-white">@Model.Count()</h4>
                             <span class="text-white">Toplam Kişi Sayısı</span>
                         </div>
                         <div class="align-self-center"><span id="dash-chart-2"></span></div>
@@ -51,16 +52,24 @@
                         <td>Ad Soyad</td>
                         <td>Code</td>
                         <td>Şifre</td>
+                        <td>Eklenme Tarihi</td>
+                        <td>Ekleyen Kişi</td>
                         <td>İşlemler</td>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach (var item in Model)
+                    {
                     <tr>
-                        <td>Serter Özbek</td>
-                        <td>So00</td>
-                        <td>123456789</td>
-                        <td><a class="btn btn-danger">Düzenle</a></td>
+                        <td>@item.NameSurname</td>
+                        <td>@item.Code</td>
+                        <td>@item.Password</td>
+                        <td>@item.CreateDate</td>
+                        <td>@item.CreateBy</td>
+                        <td><a class="btn btn-danger" href="/Person/Edit/@item.id">Düzenle</a></td>
                     </tr>
+                    }
+                    
                 </tbody>
             </table>
         </div>
