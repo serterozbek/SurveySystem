@@ -41,7 +41,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Question" Type="nvarchar" MaxLength="250" />
+    <Property Name="QuestionLine" Type="nvarchar" MaxLength="250" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifyDate" Type="datetime" />

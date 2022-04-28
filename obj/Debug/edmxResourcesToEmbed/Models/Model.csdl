@@ -36,21 +36,21 @@
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
     <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityContainer Name="survey_systemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Answer" EntityType="Self.Answer" />
+    <EntitySet Name="AnswerLine" EntityType="Self.AnswerLine" />
+    <EntitySet Name="Person" EntityType="Self.Person" />
+    <EntitySet Name="Question" EntityType="survey_systemModel.Question" />
+  </EntityContainer>
   <EntityType Name="Question">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Question1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionLine" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
     <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityContainer Name="survey_systemEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Answer" EntityType="Self.Answer" />
-    <EntitySet Name="AnswerLine" EntityType="Self.AnswerLine" />
-    <EntitySet Name="Person" EntityType="Self.Person" />
-    <EntitySet Name="Question" EntityType="Self.Question" />
-  </EntityContainer>
 </Schema>
