@@ -1,4 +1,5 @@
 ﻿using Survey_System.Models;
+using Survey_System.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,8 @@ using System.Web.Mvc;
 
 namespace Survey_System.Controllers
 {
-    public class PersonController : Controller
+    public class PersonController : BaseController
     {
-        survey_systemEntities db = new survey_systemEntities();
         public ActionResult Index()
         {
             var model = db.Person.ToList();
@@ -21,7 +21,7 @@ namespace Survey_System.Controllers
             if (person.NameSurname != null)
             {
                 person.CreateDate = DateTime.Now;
-                person.CreateBy = "System";
+                person.CreateBy = NameSurname;
                 db.Person.Add(person);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -49,7 +49,7 @@ namespace Survey_System.Controllers
             db.Entry(person).Property(e => e.CreateBy).IsModified = false;
             db.Entry(person).Property(e => e.CreateDate).IsModified = false;
 
-            person.ModifyBy = "System Edit";
+            person.ModifyBy = NameSurname;
             person.ModifyDate = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
