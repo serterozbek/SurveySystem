@@ -1,16 +1,40 @@
 ﻿@model IEnumerable<Survey_System.Models.Question>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int number = 1;
+    int gomines = 0;
 }
 <div class="card">
     <div class="card-body">
-        <div class="card-title">Anket Cevaplama Sayfası</div>
+        <div class="card-title text-center">Anket Cevaplama Sayfası</div>
         <hr>
         @using (Html.BeginForm("Create", "Answer"))
         {
             <div class="form-group">
-                @Html.DropDownList("Code",(SelectList)ViewBag.Person,"Kişi Seçiniz",new {@class="form-control"})
+                @Html.DropDownList("Code", (SelectList)ViewBag.Person, "Kişi Seçiniz", new { @class = "form-control" })
             </div>
+
+            foreach (var item in Model)
+            {
+
+                <span style="font-weight:bold">@number</span>
+                @item.QuestionLine
+                <br /><br />
+                
+                        <div class="demo-radio-button">
+                            <input name="Answer_@item.id" type="radio" id="Id_@item.id" checked="">
+                            <label for="Id_@item.id">Evet</label>
+
+                            <input name="Answer_@item.id" type="radio" id="Id_@gomines">
+                            <label for="Id_@gomines">Hayır</label>
+
+                            
+                        </div>
+                gomines--;
+                number++;
+
+
+            }
 
             <div class="form-group">
                 <button type="submit" class="btn btn-round btn-success shadow-success px-5"><i class="icon-lock"></i> Kaydet</button>
