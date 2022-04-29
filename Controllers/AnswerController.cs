@@ -1,4 +1,5 @@
-﻿using Survey_System.Utils;
+﻿using Survey_System.Models;
+using Survey_System.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,11 @@ namespace Survey_System.Controllers
 
             var questionModel = db.Question.ToList();
             return View(questionModel);
+        }
+
+        public string SendData(AnswerModel answerModel)
+        {
+            return "True";
         }
     }
 }

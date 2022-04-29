@@ -16,20 +16,52 @@
 
             foreach (var item in Model)
             {
-
+                <input name="@item.QuestionLine id=Question_@item.id" value="@item.QuestionLine" type="hidden" />
                 <span style="font-weight:bold">@number</span>
                 @item.QuestionLine
                 <br /><br />
-                
-                        <div class="demo-radio-button">
-                            <input name="Answer_@item.id" type="radio" id="Id_@item.id" checked="">
-                            <label for="Id_@item.id">Evet</label>
 
-                            <input name="Answer_@item.id" type="radio" id="Id_@gomines">
-                            <label for="Id_@gomines">Hayır</label>
+                <div class="demo-radio-button">
+                    <input name="Answer_@item.id" type="radio" id="Id_@item.id" class="radio_@item.id" checked="" value="Evet">
+                    <label for="Id_@item.id">Evet</label>
 
-                            
-                        </div>
+                    <input name="Answer_@item.id" type="radio" id="Id_@gomines" class="radio_@item.id" value="Hayır">
+                    <label for="Id_@gomines">Hayır</label>
+                </div>
+                <script>
+
+                    $('.radio_@item.id').click(function){
+                        var formdata = new FormData();
+
+                        var code = $('#Code').val();
+                        formdata.set("Code", code)
+
+                        var question = $('#Question_@item.id').val();
+                        formdata.set("Question", question)
+
+                        var answer = $('input[name="Answer_@item.id"]:checked').val();
+                        formdata.set("Answer", answer);
+
+
+                        $.ajax({
+                                url: "/Answer/SendData",
+                                data: formdata,
+                                type: "POST",
+                                cache: false,
+                                contentType: false,
+                                processData:false,
+                                success: function (data) {
+                                    if (data == "True") {
+                                    }
+                                },
+                                error: function (data) {
+                                    alert("Ekleme işlemi gerçekleştirilemedi");
+                                }
+                            });
+                    }
+
+                </script>
+
                 gomines--;
                 number++;
 
