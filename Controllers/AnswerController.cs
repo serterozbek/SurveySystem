@@ -12,14 +12,15 @@ namespace Survey_System.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = db.Answer.Where(m=>m.UserCode==UserCode).ToList();
+            return View(model);
         }
         public ActionResult Create(string Code)
         {
             if (Code == null)
             {
                 List<SelectListItem> personList = (from person in db.Person
-                                                   where person.Code != Code
+                                                   where person.Code != UserCode
                                                    select new SelectListItem
                                                    {
                                                        Text = person.NameSurname,
@@ -41,7 +42,7 @@ namespace Survey_System.Controllers
         public void CalculateScore(string code)
         {
             double yes = 0, no = 0, result = 0;
-            var answer = db.Answer.FirstOrDefault(m => m.PersonCode == code && m.UserCode == Code);
+            var answer = db.Answer.FirstOrDefault(m => m.PersonCode == code && m.UserCode == UserCode);
 
             var answerLine = db.AnswerLine.Where(m => m.AnswerId == answer.id).ToList();
 
@@ -73,7 +74,7 @@ namespace Survey_System.Controllers
         {
             //ayda bir kontrolü 
             int? month = DateTime.Now.Month;
-            var model = db.Answer.FirstOrDefault(m => m.PersonCode == answerModel.Code && m.UserCode == Code && m.CreateDate.Value.Month == month);
+            var model = db.Answer.FirstOrDefault(m => m.PersonCode == answerModel.Code && m.UserCode == UserCode && m.CreateDate.Value.Month == month);
             // 
             if (model != null)
             {
@@ -84,7 +85,7 @@ namespace Survey_System.Controllers
                 Answer answer = new Answer();
                 answer.PersonCode = answerModel.Code;
                 answer.PersonName = answerModel.NameSurname;
-                answer.UserCode = Code;
+                answer.UserCode = UserCode;
                 answer.CreateDate = DateTime.Now;
                 answer.CreateBy = NameSurname;
 

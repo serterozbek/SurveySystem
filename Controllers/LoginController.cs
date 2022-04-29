@@ -34,5 +34,10 @@ namespace Survey_System.Controllers
             }
 
         }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("SignIn","Login");
+        }
     }
 }

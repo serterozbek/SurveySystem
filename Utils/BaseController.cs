@@ -10,7 +10,7 @@ namespace Survey_System.Utils
     public class BaseController : Controller
     {
         public survey_systemEntities db = new survey_systemEntities();
-        public string Code { get; set; }
+        public string UserCode { get; set; }
         public string NameSurname { get; set; }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -20,7 +20,7 @@ namespace Survey_System.Utils
             }
             else
             {
-                Code = Session["Code"].ToString();
+                UserCode = Session["Code"].ToString();
                 NameSurname = Session["NameSurname"].ToString();
             }
             base.OnActionExecuting(filterContext);
