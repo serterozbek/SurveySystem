@@ -12,8 +12,16 @@ namespace Survey_System.Controllers
     {
         public ActionResult Index()
         {
-            var model = db.Person.ToList();
-            return View(model);
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("SignIn", "Login");
+            }
+            else
+            {
+                var model = db.Person.ToList();
+                return View(model);
+            }
+
         }
 
         public ActionResult Create(Person person, string Answer)
@@ -22,7 +30,7 @@ namespace Survey_System.Controllers
             {
                 person.CreateDate = DateTime.Now;
                 person.CreateBy = NameSurname;
-                if (Answer==Constants.AnswerType.Yes)
+                if (Answer == Constants.AnswerType.Yes)
                 {
                     person.IsAdmin = true;
                 }
@@ -36,14 +44,14 @@ namespace Survey_System.Controllers
             }
             else
             {
-            return View();
+                return View();
             }
 
         }
 
         public ActionResult Edit(int? id)
         {
-            if (id==null || id==0)
+            if (id == null || id == 0)
             {
                 return HttpNotFound();
             }
