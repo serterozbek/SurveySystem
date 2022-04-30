@@ -40,6 +40,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="bit" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -97,6 +98,7 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="survey_systemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Answer" EntityType="Self.Answer" />
@@ -149,6 +151,7 @@
           <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="survey_systemModel.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
